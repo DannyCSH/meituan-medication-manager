@@ -19,7 +19,7 @@ const today = new Date().toISOString().slice(0, 10)
 const addDays = (days: number) => { const date = new Date(); date.setDate(date.getDate() + days); return date.toISOString().slice(0, 10) }
 const dateKey = (offset: number) => { const date = new Date(); date.setDate(date.getDate() + offset); return date.toISOString().slice(0, 10) }
 const shortDate = (value: string) => new Date(`${value}T00:00:00`).toLocaleDateString('zh-CN', { month: 'numeric', day: 'numeric' })
-const friendlyDate = new Date().toLocaleDateString('zh-CN', { month: 'long', day: 'numeric', weekday: 'long' })
+const friendlyDate = new Date().toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' })
 const feelingOptions = ['今天正常', '头晕', '胃不舒服', '心慌', '乏力', '睡不好', '低血糖感', '水肿', '咳嗽', '担心副作用']
 const missedReasonOptions = ['忘记了', '外出没带药', '饭点变化', '不确定是否已经吃过', '药快没了', '担心吃了不舒服']
 
