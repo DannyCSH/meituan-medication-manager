@@ -1,0 +1,27 @@
+{
+    "scripts":  {
+                    "dev":  "vite",
+                    "build":  "tsc -b \u0026\u0026 vite build",
+                    "preview":  "vite preview",
+                    "lint":  "eslint ."
+                },
+    "dependencies":  {
+                         "vite":  "latest",
+                         "typescript":  "latest",
+                         "react":  "latest",
+                         "react-dom":  "latest",
+                         "@vitejs/plugin-react":  "latest"
+                     },
+    "devDependencies":  {
+                            "tailwindcss":  "latest",
+                            "@tailwindcss/vite":  "latest",
+                            "eslint":  "latest",
+                            "typescript-eslint":  "latest",
+                            "@eslint/js":  "latest",
+                            "eslint-plugin-react-hooks":  "latest",
+                            "eslint-plugin-react-refresh":  "latest",
+                            "@types/react":  "latest",
+                            "@types/react-dom":  "latest"
+                        },
+    "type":  "module"
+}
