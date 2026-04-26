@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
+// deploy marker: follow-up copy trimmed
 
 type TabKey = 'dashboard' | 'checkin' | 'plan' | 'inventory' | 'assistant'
 type TaskStatus = 'pending' | 'done' | 'snoozed' | 'missed'
