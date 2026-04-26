@@ -54,7 +54,7 @@ function hydrateState(raw: string | null): AppState {
 }
 
 const defaultState = (): AppState => ({
-  user: { name: '张阿姨', age: 58, chronicDiseases: ['高血压', '2 型糖尿病'], familyCareEnabled: false },
+  user: { name: '用户', age: 58, chronicDiseases: ['高血压', '2 型糖尿病'], familyCareEnabled: false },
   medications: [
     { id: 'med-a', displayName: '降压药 A', exampleName: '示例：苯磺酸氨氯地平片', doseText: '每次 1 片', frequencyText: '每日 1 次，早 8:00', dailyUsage: 1, stockCount: 12, lowStockThreshold: 7, note: '演示样例，请以处方为准，以医生处方或药师指导为准。' },
     { id: 'med-b', displayName: '降糖药 B', exampleName: '示例：二甲双胍缓释片', doseText: '每次 1 片', frequencyText: '每日 2 次，早晚饭后', dailyUsage: 2, stockCount: 10, lowStockThreshold: 7, note: '演示样例，请以处方为准，以医生处方或药师指导为准。' },
