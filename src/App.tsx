@@ -78,7 +78,7 @@ const defaultState = (): AppState => ({
 })
 
 const tabs: Array<{ key: TabKey; label: string; icon: string }> = [
-  { key: 'dashboard', label: '首页', icon: '🏡' }, { key: 'checkin', label: '打卡', icon: '✅' }, { key: 'plan', label: '计划', icon: '📋' }, { key: 'inventory', label: '库存', icon: '🧺' }, { key: 'assistant', label: '助手', icon: '💬' },
+  { key: 'dashboard', label: '首页', icon: '🏡' }, { key: 'checkin', label: '打卡', icon: '✅' }, { key: 'plan', label: '计划', icon: '📋' }, { key: 'inventory', label: '库存', icon: '💊' }, { key: 'assistant', label: '助手', icon: '💬' },
 ]
 function getDaysLeft(stockCount: number, dailyUsage: number) { return dailyUsage <= 0 ? Number.POSITIVE_INFINITY : Math.floor(stockCount / dailyUsage) }
 function getInventoryLevel(daysLeft: number): RiskLevel { if (daysLeft <= 3) return 'danger'; if (daysLeft <= 7) return 'warning'; return 'normal' }
