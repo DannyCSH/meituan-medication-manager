@@ -35,6 +35,24 @@ function defaultWeekRecords(): DayRecord[] {
   ]
 }
 
+function normalizeWeekRecords(records?: DayRecord[]): DayRecord[] {
+  const existing = new Map((records ?? []).map(day => [day.date, day]))
+  return defaultWeekRecords().map(day => existing.get(day.date) ?? day)
+}
+
+function normalizeTasks(tasks?: MedicationTask[]): MedicationTask[] {
+  const baseTasks = defaultState().tasks
+  const existingTodayTasks = (tasks ?? []).filter(task => task.date === today)
+  return baseTasks.map(baseTask => existingTodayTasks.find(task => task.id === baseTask.id) ?? baseTask)
+}
+
+function hydrateState(raw: string | null): AppState {
+  const base = defaultState()
+  if (!raw) return base
+  const saved = JSON.parse(raw) as Partial<AppState>
+  return { ...base, ...saved, weekRecords: normalizeWeekRecords(saved.weekRecords), tasks: normalizeTasks(saved.tasks) }
+}
+
 const defaultState = (): AppState => ({
   user: { name: '张阿姨', age: 58, chronicDiseases: ['高血压', '2 型糖尿病'], familyCareEnabled: false },
   medications: [
@@ -73,7 +91,7 @@ function formatCounts(counts: Record<string, number>) { const entries = Object.e
 export function App() {
   const [activeTab, setActiveTab] = useState<TabKey>('dashboard')
   const [toast, setToast] = useState('')
-  const [state, setState] = useState<AppState>(() => { try { const raw = localStorage.getItem(STORAGE_KEY); return raw ? { ...defaultState(), ...JSON.parse(raw) } : defaultState() } catch { return defaultState() } })
+  const [state, setState] = useState<AppState>(() => { try { return hydrateState(localStorage.getItem(STORAGE_KEY)) } catch { return defaultState() } })
   useEffect(() => localStorage.setItem(STORAGE_KEY, JSON.stringify(state)), [state])
   useEffect(() => { if (!toast) return; const timer = window.setTimeout(() => setToast(''), 2800); return () => window.clearTimeout(timer) }, [toast])
   const metrics = useMemo(() => { const total = state.tasks.length; const done = state.tasks.filter(task => task.status === 'done').length; const pending = state.tasks.filter(task => task.status === 'pending').length; const lowStock = state.medications.filter(med => getDaysLeft(med.stockCount, med.dailyUsage) <= med.lowStockThreshold).length; const weekPlanned = state.weekRecords.reduce((sum, day) => sum + day.planned, 0); const weekDone = state.weekRecords.reduce((sum, day) => sum + day.done, 0); return { total, done, pending, lowStock, weekPlanned, weekDone } }, [state])
